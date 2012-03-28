@@ -37,7 +37,7 @@ class Readmill():
     def auth(self):
         pass # http://pypi.python.org/pypi/requests-oauth
 
-if __name__ = "__main__":
+if __name__ == "__main__":
     print "Running tests:"
     r = Readmill()
     print "Get user 1"
