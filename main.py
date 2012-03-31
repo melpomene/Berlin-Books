@@ -15,6 +15,7 @@ session = web.session.Session(app, web.session.DiskStore('sessions'), initialize
 
 class index:
 	def GET(self):
+		print(session)
 		return render.base(view.index(access_token=session.access_token, session=session))
 
 class callback:

@@ -1,4 +1,4 @@
-import requests, json
+import http, json
 
 baseurl = 'https://graph.facebook.com/'
 access_token_query = '?access_token='
@@ -12,7 +12,7 @@ class Facebook():
 		""" Prints all friends"""
 		query_url = baseurl +'me/friends' + self.access_token
 		
-		r = requests.get(query_url)
+		r = http.get(query_url)
 		if r.status_code != 200: 
 			print "There was a problem connecting to facebook.\nStatus code: " + str(r.status_code)
 		else:
@@ -22,7 +22,7 @@ class Facebook():
 	def get_books(self, friend_id="me"):
 		query_url = baseurl +str(friend_id) + '/books' + self.access_token
 		print query_url
-		r = requests.get(query_url)
+		r = http.get(query_url)
 
 		if r.status_code != 200:
 			print "There was a problem connecting to facebook.\nStatus code: " + str(r.status_code)

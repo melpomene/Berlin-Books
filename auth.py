@@ -1,4 +1,4 @@
-import requests
+import http
 
 class ReadmillAuth:
 
@@ -22,7 +22,8 @@ class ReadmillAuth:
 		access_token_uri = "http://readmill.com/oauth/token?grant_type=authorization_code&client_id=" + \
 		                   self.cliend_id + "&client_secret=" + self.client_secret + "redirect_uri=" + \
 		                   self.redirect_uri + "&code=" + callback_code
-		requests.post(access_token_uri)
+		# Not implemented
+		# http.post(access_token_uri)
 
 	def generate_refresh_token(self, refresh_token):
 		refresh_token = "http://readmill.com/oauth/token?grant_type=refresh_token&client_id=" + \
@@ -43,7 +44,8 @@ class FacebookAuth:
 		token_path = "https://graph.facebook.com/oauth/access_token?client_id=" + self.client_id + \
 		             "&redirect_uri=" + self.redirect_uri + "&client_secret=" + self.client_secret + \
 		             "&code=" + code
-		response = requests.get(token_path)
+		response = http.get(token_path)
+		print response.content
 		return response.content
 
 
