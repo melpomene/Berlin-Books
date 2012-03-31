@@ -9,8 +9,11 @@ urls = (
     '/auth', 'auth',
 )
 
+web.config.debug = False
+
 app = web.application(urls, globals())
 
+session = web.session.Session(app, web.session.DiskStore('sessions'), initializer={'count': 0})
 
 class index:
 	def GET(self):
