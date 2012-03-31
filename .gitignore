@@ -1,1 +1,4 @@
 *.pyc
+.DS_Store
+lost+found
+config.ini
