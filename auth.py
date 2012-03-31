@@ -41,10 +41,10 @@ class FacebookAuth:
 	def request_access_token(self, code):
 		# May need a different redirect_uri here?
 		token_path = "https://graph.facebook.com/oauth/access_token?client_id=" + self.client_id + \
-		             "&redirect_uri=" + redirect_uri + "&client_secret=" + self.client_secret + \
+		             "&redirect_uri=" + self.redirect_uri + "&client_secret=" + self.client_secret + \
 		             "&code=" + code
 		response = requests.get(token_path)
-		print(response)
+		return response.content
 
 
 
