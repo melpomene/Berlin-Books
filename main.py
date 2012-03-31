@@ -19,7 +19,8 @@ class index:
 class callback:
 	""" Callback from facebook oauth 2 """
 	def GET(self):
-		return "GET CALLBACK"
+		ans = web.input(secret = "")
+		return "Got secret: " + str(ans.code)
 
 class auth:
 	"""Promt for facebook login""" 
