@@ -2,7 +2,7 @@ import http, urllib, json
 
 base_url = "https://www.googleapis.com/books/v1/volumes"
 
-def get_book_info(name):
+def get(name):
 	query_url = base_url + "?q=" + urllib.quote(name)
 	r = http.get(query_url)
 	json_r = json.loads(r.content)

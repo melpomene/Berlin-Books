@@ -1,11 +1,12 @@
-$def with (friend_list, book_list, friend_book_list)
+$def with (recommended)
+
+<h2>Suggested reads!</h2>
+$for book in recommended:
+	<div class="book">
+    <a href="https://duckduckgo.com/?q=$book['title']" /><img src="$book['images']['thumbnail']" alt="$book['title']"/></a>
+    </div>
 
 
-Requesting facebook friends: 
-<br /> <br />
-$friend_list
-<br /> <br />
-$book_list
 
 
 
