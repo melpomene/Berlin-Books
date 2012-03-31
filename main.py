@@ -23,7 +23,7 @@ class callback:
 	""" Callback from facebook oauth 2 """
 	def GET(self):
 		ans = web.input(secret = "")
-		return render.base(view.callback(code=str(ans.code)))
+		return render.base(view.callback(code=str(ans.code), session=session))
 
 class auth:
 	"""Promt for facebook login""" 
