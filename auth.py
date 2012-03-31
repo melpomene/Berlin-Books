@@ -37,7 +37,7 @@ class FacebookAuth:
 		self.client_secret = client_secret
 		self.redirect_uri = redirect_uri
 		self.auth_string = "https://graph.facebook.com/oauth/authorize?client_id=" + self.client_id + \
-						   "&redirect_uri=" + self.redirect_uri
+						   "&redirect_uri=" + self.redirect_uri + "&scope=user_likes,friends_likes"
 
 	def request_access_token(self, code):
 		# May need a different redirect_uri here?
