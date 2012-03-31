@@ -20,6 +20,5 @@ def callback(**k):
 	session = k['session']
 	session.auth_token 	= response['access_token']
 	session["expires"] 			= response['expires']
-	print("The auth token in session is " + session.auth_token)
 
 	return render.callback()
