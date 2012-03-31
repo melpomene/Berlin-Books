@@ -1,3 +1,4 @@
+import json
 
 class Recommend():
 	def build_dict(self, users_book_list, user_book_list):
@@ -9,6 +10,7 @@ class Recommend():
 		d = {}
 		i = 0
 		self.user = user_book_list
+		print "MY AWESOME BOOK LIST: " + json.loads(self.user)
 		for book in user_book_list:
 			if book not in d.values():
 				d[i] = book
