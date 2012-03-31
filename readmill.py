@@ -28,6 +28,8 @@ class Readmill():
         if isbn is not None:
             params.append("&q[isbn]=" + urllib.urlencode(isbn))
         baseStr += ''.join(params)
+        print baseStr
+        exit(0)
         r = requests.get(baseStr)
         if r.status_code == 200: 
             return r.content

@@ -1,4 +1,5 @@
-import web, auth, ConfigParser, view
+import web, ConfigParser, view
+import auth as oauth2
 config = ConfigParser.RawConfigParser()
 config.read('config.ini')
 FACEBOOK_ID = config.get("FACEBOOK", "ID")
@@ -17,8 +18,9 @@ app = web.application(urls, globals())
 
 class index:
 	def GET(self):
-		auth = auth.FacebookAuth(FACEBOOK_ID, FACEBOOK_SECRET, "/callback")
-		return render.base(view.index())
+		fb = oauth2.FacebookAuth(FACEBOOK_ID, FACEBOOK_SECRET, "http://localhost:8080/callback")
+		return fb.auth_string
+		#return render.base(view.index())
 
 class callback:
 	""" Callback from facebook oauth 2 """

@@ -31,12 +31,11 @@ class ReadmillAuth:
 
 class FacebookAuth:
 
-	def __init__(self, app_id, app_secret, redirect_uri):
+	def __init__(self, client_id, client_secret, redirect_uri):
 		self.client_id = client_id
 		self.client_secret = client_secret
-		self.app_secret = app_secret
 		self.redirect_uri = redirect_uri
-		self.auth_string = "https://graph.facebook.com/oauth/authorize?client_id=" + self.app_id + \
+		self.auth_string = "https://graph.facebook.com/oauth/authorize?client_id=" + self.client_id + \
 						   "&redirect_uri=" + self.redirect_uri
 
 	def request_access_token(self, code):
