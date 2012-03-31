@@ -1,4 +1,4 @@
-import http, json
+import http, json, urllib
 
 baseurl = 'https://graph.facebook.com/'
 access_token_query = '?access_token='
@@ -6,11 +6,11 @@ access_token_query = '?access_token='
 class Facebook():
 
 	def __init__(self, token): 
-		self.access_token = access_token_query + token
+		self.access_token = token
 	
 	def get_friends(self):
 		""" Prints all friends"""
-		query_url = baseurl +'me/friends' + self.access_token
+		query_url = baseurl +'me/friends?access_token=' + self.access_token
 		
 		r = http.get(query_url)
 		if r.status_code != 200: 
@@ -20,7 +20,7 @@ class Facebook():
 			return jr["data"]
 
 	def get_books(self, friend_id="me"):
-		query_url = baseurl +str(friend_id) + '/books' + self.access_token
+		query_url = baseurl +str(friend_id) + '/books?access_token=' + self.access_token
 		print query_url
 		r = http.get(query_url)
 
@@ -35,22 +35,35 @@ class Facebook():
 
 	def generate_batch_request(self, friends):
 		batch = list()
+		responses = list()
 		print friends[10]["id"]
-		for friend in friends:
+
+		for i in range(len(friends)):
 			entry = dict()
 			entry['method'] = 'GET'
-			entry['relative_url'] = friend['id'] + "/books"
+			entry['relative_url'] = friends[i]['id'] + "/books"
 			batch.append(entry)
-		# batch_req = "&batch=" + json.dumps(batch)
+			if (i%50 == 49) or (i == len(friends)-1):
+				batch_req = json.dumps(batch)
+				post_data = "access_token=" + self.access_token +"&batch=" + batch_req
+				response = http.post(baseurl, post_data)
+				responses.append(response.content)
+				batch = list()
+				## REMOVE ME
+				break
 
-		batch_req = '&batch=[{"method": "GET", "relative_url": "me"},\
-            {"method": "GET", "relative_url": "me/friends?limit=50"}]'
-		
 
-		query_url = baseurl + self.access_token + batch_req
-		response = http.get(query_url)
-		print response.content
+		for response in responses:
+			json_response = json.loads(response)
+			print json_response
 		return json.dumps(batch)
 
-
+	def do_fql_request(self):
+		queries = dict()
+		friends_query = '"friends_q":"SELECT uid2 FROM friend WHERE uid1 = me()"'
+		books_query = '"books_q":"SELECT uid,books FROM user WHERE uid IN (SELECT uid2 FROM #friends_q) AND books != \'\' "'
+		req_url = baseurl + "fql?q=" + urllib.quote("{" + friends_query + "," + books_query + "}") + "&access_token=" + self.access_token
+		print req_url
+		r = http.get(req_url)
+		print r.content
 

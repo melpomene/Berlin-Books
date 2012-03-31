@@ -11,6 +11,17 @@ def get(url):
 	buf.close()
 	return response_object
 
+def post(url, data):
+	buf = cStringIO.StringIO()
+	c = pycurl.Curl()
+	c.setopt(c.URL, url)
+	c.setopt(c.POSTFIELDS, data)
+	c.setopt(c.WRITEFUNCTION, buf.write)
+	c.perform()
+	response_object = Response(buf.getvalue(), c.getinfo(pycurl.HTTP_CODE))
+	buf.close()
+	return response_object
+
 class Response:
 
 	def __init__(self, content, status_code):
