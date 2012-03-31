@@ -17,12 +17,7 @@ def index(**k):
 		fb = facebook.Facebook(session.access_token)
 		friends = fb.get_friends()
 		friends_books = ""
-		for friend in friends: 
-
-			print friend["id"]
-			books = fb.get_books(friend["id"])
-			print books
-			friends_books += books
+		fb.generate_batch_request(friends)
 
 		#books = fb.get_books()
 

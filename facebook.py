@@ -29,11 +29,28 @@ class Facebook():
 		else:
 			jr = json.loads(r.content)
 			string = ""
-			for book in jr["data"]:
-				string += book['name'] + '\n'
-			return string
+			#for book in jr["data"]:
+			#	string += book['name'] + '\n'
+			#return string
 
+	def generate_batch_request(self, friends):
+		batch = list()
+		print friends[10]["id"]
+		for friend in friends:
+			entry = dict()
+			entry['method'] = 'GET'
+			entry['relative_url'] = friend['id'] + "/books"
+			batch.append(entry)
+		# batch_req = "&batch=" + json.dumps(batch)
 
+		batch_req = '&batch=[{"method": "GET", "relative_url": "me"},\
+            {"method": "GET", "relative_url": "me/friends?limit=50"}]'
+		
+
+		query_url = baseurl + self.access_token + batch_req
+		response = http.get(query_url)
+		print response.content
+		return json.dumps(batch)
 
 
 
