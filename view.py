@@ -16,7 +16,8 @@ def callback(**k):
 	fb = oauth2.FacebookAuth(FACEBOOK_ID, FACEBOOK_SECRET, "http://localhost:8080/callback")
 	response = urlparse.parse_qs(fb.request_access_token(k['code']))
 	session = k['session']
-	session["access_token"] 	= response['access_token']
-	session["expires"] 			= response['expires']
+	session.access_token 	= response['access_token']
+	session.expires 		= response['expires']
+	print session.expires
 
 	return render.callback()
