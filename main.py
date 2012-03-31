@@ -9,12 +9,13 @@ urls = (
 )
 
 web.config.debug = False
+
 app = web.application(urls, globals())
-session = web.session.Session(app, web.session.DiskStore('sessions'), initializer={'auth_token': 'undefined', 'expires':'0'})
+session = web.session.Session(app, web.session.DiskStore('sessions'), initializer={'access_token': 'undefined', 'expires':'0'})
 
 class index:
 	def GET(self):
-		return render.base(view.index(auth_token=session.auth_token))
+		return render.base(view.index(access_token=session.access_token))
 
 class callback:
 	""" Callback from facebook oauth 2 """
