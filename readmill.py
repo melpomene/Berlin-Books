@@ -18,25 +18,6 @@ class Readmill():
         else: 
             raise Exception, "Error Occured: " + str(r.error)
             
-    def findBook(self, isbn=None, title=None, author=None):
-        baseStr = self.baseUrl + "/books/match?client_id="+self.CLIENTID
-        params = []
-        if title is not None:
-            params.append("&q[title]=" + urllib.urlencode(title))
-        if author is not None:
-            params.append("&q[author]=" + urllib.urlencode(author))
-        if isbn is not None:
-            params.append("&q[isbn]=" + urllib.urlencode(isbn))
-        baseStr += ''.join(params)
-        print baseStr
-        exit(0)
-        r = requests.get(baseStr)
-        if r.status_code == 200: 
-            return r.content
-            return json.loads(r.content)
-        else: 
-            raise Exception, "Error Occured: " + str(r.error)
-    
     def auth(self):
         pass # http://pypi.python.org/pypi/requests-oauth
 
