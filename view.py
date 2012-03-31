@@ -20,7 +20,8 @@ def callback(**k):
 	session = k['session']
 	session.access_token 	= response['access_token']
 	session.expires 		= response['expires']
-	print session.expires
+	print session.access_token
+	session.save()
 
 
 	return render.callback()
