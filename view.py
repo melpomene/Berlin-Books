@@ -1,4 +1,10 @@
-import web
+import web, ConfigParser
+import auth as oauth2
+
+config = ConfigParser.RawConfigParser()
+config.read('config.ini')
+FACEBOOK_ID = config.get("FACEBOOK", "ID")
+FACEBOOK_SECRET = config.get("FACEBOOK", "SECRET")
 
 render = web.template.render('templates/')
 
