@@ -21,7 +21,6 @@ class Recommend():
 				d[i] = book
 				i += 1
 
-		print d.values()
 		matrix = []
 		self.user = []
 		for i in xrange(len(d)):
@@ -40,7 +39,6 @@ class Recommend():
 			matrix.append(row)
 
 		self.matrix = matrix
-		#print matrix
 		self.book_dictionary = d
 
 	def compare(self):
@@ -55,14 +53,12 @@ class Recommend():
 				greatest = total
 				greatest_user = user
 		if greatest_user is None:
-			print "No one likes you"
-			return
-		print "You: \t\t\t" + str(self.user)
-		print "Your best match: \t" + str(greatest_user)
-		print "Maybe you have missed out these titles:"
+			return []
+		recommendations = []
 		for i in xrange(len(self.user)):
 			if self.user[i] == 0 and greatest_user[i] == 1:
-				print self.book_dictionary[i] 
+				recommendations.append( self.book_dictionary[i])
+		return recommendations
 				
 		
 if __name__ == "__main__":
