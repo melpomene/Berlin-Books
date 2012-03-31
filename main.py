@@ -18,9 +18,7 @@ app = web.application(urls, globals())
 
 class index:
 	def GET(self):
-		fb = oauth2.FacebookAuth(FACEBOOK_ID, FACEBOOK_SECRET, "http://localhost:8080/callback")
-		return fb.auth_string
-		#return render.base(view.index())
+		return render.base(view.index())
 
 class callback:
 	""" Callback from facebook oauth 2 """
