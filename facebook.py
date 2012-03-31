@@ -63,7 +63,11 @@ class Facebook():
 		friends_query = '"friends_q":"SELECT uid2 FROM friend WHERE uid1 = me()"'
 		books_query = '"books_q":"SELECT uid,books FROM user WHERE uid IN (SELECT uid2 FROM #friends_q) AND books != \'\' "'
 		req_url = baseurl + "fql?q=" + urllib.quote("{" + friends_query + "," + books_query + "}") + "&access_token=" + self.access_token
-		print req_url
+		#print req_url
 		r = http.get(req_url)
-		print r.content
+		json_r = json.loads(r.content)
+		print json_r['data'][1]['fql_result_set']
+
+
+		#print r.content
 
