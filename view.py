@@ -16,7 +16,13 @@ def index(**k):
 		session = k['session']
 		fb = facebook.Facebook(session.access_token)
 		friends = fb.get_friends()
-		return render.index(friend_list=friends)
+		friends_books = ""
+		for friend in friends: 
+			friends_books += fb.get_books(friend["id"])
+
+		books = fb.get_books()
+
+		return render.index(friend_list="", book_list= books, friend_book_list=friends_books)
 
 def callback(**k):
 	fb = oauth2.FacebookAuth(FACEBOOK_ID, FACEBOOK_SECRET, "http://0.0.0.0:8080/callback")
