@@ -30,4 +30,24 @@ class ReadmillAuth:
 		                refresh_token
 
 class FacebookAuth:
+
+	def __init__(self, app_id, app_secret, redirect_uri):
+		self.client_id = client_id
+		self.client_secret = client_secret
+		self.app_secret = app_secret
+		self.redirect_uri = redirect_uri
+		self.auth_string = "https://graph.facebook.com/oauth/authorize?client_id=" + self.app_id + \
+						   "&redirect_uri=" + self.redirect_uri
+
+	def request_access_token(self, code):
+		# May need a different redirect_uri here?
+		token_path = "https://graph.facebook.com/oauth/access_token?client_id=" + self.client_id + \
+		             "&redirect_uri=" + redirect_uri + "&client_secret=" + self.client_secret + \
+		             "&code=" + code
+		response = requests.get(token_path)
+		print(response)
+
+
+
+
 	
