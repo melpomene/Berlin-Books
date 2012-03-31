@@ -18,7 +18,8 @@ app = web.application(urls, globals())
 
 class index:
 	def GET(self):
-		auth = auth.FacebookAuth("")
+		auth = auth.FacebookAuth(FACEBOOK_ID, FACEBOOK_SECRET, "/callback")
+		
 		
 
 class callback:
