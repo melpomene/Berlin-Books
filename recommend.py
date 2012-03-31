@@ -8,18 +8,27 @@ class Recommend():
 
 		d = {}
 		i = 0
-		self.user = user_book_list
-		for book in user_book_list:
-			if book not in d.values():
-				d[i] = book
-				i += 1
+
 		for user in users_book_list:
 			for book in user["books"]:
 				if book not in d.values():
 					d[i] = book
 					i += 1
-		print d
+
+
+		for book in user_book_list:
+			if book not in d.values():
+				d[i] = book
+				i += 1
+
+		print d.values()
 		matrix = []
+		self.user = []
+		for i in xrange(len(d)):
+			if d[i] in user_book_list: 
+				self.user.append(1)
+			else:
+				self.user.append(0)
 
 		for i in xrange(len(users_book_list)):
 			row = []
@@ -31,7 +40,7 @@ class Recommend():
 			matrix.append(row)
 
 		self.matrix = matrix
-		print matrix
+		#print matrix
 		self.book_dictionary = d
 
 	def compare(self):
@@ -42,7 +51,7 @@ class Recommend():
 			for i in xrange(len(self.user)):
 				if self.user[i] == 1 and user[i] == 1: 
 					total += 1
-			if total > greatest and user != self.user:
+			if total > greatest:
 				greatest = total
 				greatest_user = user
 		if greatest_user is None:
