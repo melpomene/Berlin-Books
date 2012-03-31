@@ -18,7 +18,7 @@ def facebook():
 			for friend in jr["data"]:
 				print friend["name"] + "\n"
 
-	def get_books(self, friend_id):
+	def get_books(self, friend_id="me"):
 		query_url = baseurl +str(friend_id) + '/books' + access_token + self.access_token
 		r = requests.get(query_url)
 		if r.status_code != 200:
@@ -27,7 +27,8 @@ def facebook():
 			jr = json.load(r.content):
 				for book in jr["data"]:
 					print book['name'] + '\n'
-		
+
+
 
 
 

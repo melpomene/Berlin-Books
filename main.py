@@ -17,13 +17,14 @@ session = web.session.Session(app, web.session.DiskStore('sessions'), initialize
 
 class index:
 	def GET(self):
+		return session.auth_token
 		return render.base(view.index(session.auth_token))
 
 class callback:
 	""" Callback from facebook oauth 2 """
 	def GET(self):
 		ans = web.input(secret = "")
-		return render.base(view.callback(code=str(ans.code)))
+		return render.base(view.callback(code=str(ans.code), session=session))
 
 class auth:
 	"""Promt for facebook login""" 

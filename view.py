@@ -1,4 +1,4 @@
-import web, ConfigParser, urlparse
+import web, ConfigParser, urlparse, tempfile
 import auth as oauth2
 
 config = ConfigParser.RawConfigParser()
@@ -15,12 +15,8 @@ def index(**k):
 def callback(**k):
 	fb = oauth2.FacebookAuth(FACEBOOK_ID, FACEBOOK_SECRET, "http://localhost:8080/callback")
 	response = urlparse.parse_qs(fb.request_access_token(k['code']))
-	web.config.session_parameters.handler = 'file'
-	web.config.handler_parameters.file_prefix = 'sess'
-	web.config.handler_parameters.file_dir = '/tmp'
-	s = web.ctx.session
-	s.start()
-	s.auth_token = response
+	session = k['session']
+	session["access_token"] 	= response['access_token']
+	session["expires"] 			= response['expires']
 
-	print s.auth_token
 	return render.callback()
