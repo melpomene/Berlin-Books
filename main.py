@@ -17,10 +17,12 @@ class index:
 		return render.index(name)
 
 class callback:
+	""" Callback from facebook oauth 2 """
 	def GET(self):
 		return "GET CALLBACK"
 
-class auth: 
+class auth:
+	"""Promt for facebook login""" 
 	def GET(self): 
 		return "AUTH HERE"
 
