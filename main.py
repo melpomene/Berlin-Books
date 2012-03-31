@@ -1,4 +1,5 @@
 import web
+import view
 
 render = web.template.render('templates/')
         
@@ -13,14 +14,13 @@ app = web.application(urls, globals())
 
 class index:
 	def GET(self):
-		name = 'Bob'    
-		return render.index(name)
+		return render.base(view.index())
 
 class callback:
 	""" Callback from facebook oauth 2 """
 	def GET(self):
 		ans = web.input(secret = "")
-		return "Got secret: " + str(ans.code)
+		return render.base(view.callback(code=str(ans.code)))
 
 class auth:
 	"""Promt for facebook login""" 
