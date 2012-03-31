@@ -26,8 +26,6 @@ if __name__ == "__main__":
     r = Readmill()
     print "Get user 1"
     print r.getUser(1)
-    print "Find book"
-    print r.findBook(isbn="9780765319852") 
     
     
     

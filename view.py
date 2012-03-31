@@ -1,4 +1,4 @@
-import web, ConfigParser, urlparse, tempfile, facebook
+import web, ConfigParser, urlparse, tempfile, facebook, recommend, readmill, copy
 import auth as oauth2
 
 config = ConfigParser.RawConfigParser()
@@ -14,15 +14,17 @@ def index(**k):
 		return render.auth(auth=fb_auth.auth_string)
 	else:
 		session = k['session']
-		fb = facebook.Facebook(session.access_token)
-		friends = fb.get_friends()
-		friends_books = ""
-		#batch_req = fb.generate_batch_request(friends)
-		fb.do_fql_request()
+		user_list = facebook.do_fql_request(session.access_token)
 
-		#books = fb.get_books()
+		you = facebook.get_user_book(session.access_token)
+		
 
-		return render.index(friend_list="", book_list= "", friend_book_list=friends_books)
+
+		r = recommend.Recommend()
+		r.build_dict(user_list, you)
+		r.compare()
+		return ""
+		#return render.index(friend_list="", book_list= "", friend_book_list=friends_books)
 
 def callback(**k):
 	fb = oauth2.FacebookAuth(FACEBOOK_ID, FACEBOOK_SECRET, "http://0.0.0.0:8080/callback")
