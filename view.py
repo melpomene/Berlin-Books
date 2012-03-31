@@ -10,13 +10,16 @@ render = web.template.render('templates/')
 
 def index(**k):
 	fb = oauth2.FacebookAuth(FACEBOOK_ID, FACEBOOK_SECRET, "http://localhost:8080/callback")
-	return render.index(auth=fb.auth_string)
+	return render.index(auth=fb.auth_string, auth_token=k['auth_token'])
 
 def callback(**k):
 	fb = oauth2.FacebookAuth(FACEBOOK_ID, FACEBOOK_SECRET, "http://localhost:8080/callback")
+	print("Doing the auth token request")
 	response = urlparse.parse_qs(fb.request_access_token(k['code']))
+	print("done doing the auth token request.")
 	session = k['session']
-	session["access_token"] 	= response['access_token']
+	session.auth_token 	= response['access_token']
 	session["expires"] 			= response['expires']
+	print("The auth token in session is " + session.auth_token)
 
 	return render.callback()

@@ -17,8 +17,7 @@ session = web.session.Session(app, web.session.DiskStore('sessions'), initialize
 
 class index:
 	def GET(self):
-		return session.auth_token
-		return render.base(view.index(session.auth_token))
+		return render.base(view.index(auth_token=session.auth_token))
 
 class callback:
 	""" Callback from facebook oauth 2 """
