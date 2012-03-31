@@ -15,13 +15,12 @@ def index(**k):
 def callback(**k):
 	fb = oauth2.FacebookAuth(FACEBOOK_ID, FACEBOOK_SECRET, "http://localhost:8080/callback")
 	print("Doing the auth token request")
-	response = urlparse.parse_qs(fb.request_access_token(k['code']))
+	string = fb.request_access_token(k['code'])
+	print "Got answer now parsing"
+	response = urlparse.parse_qs(string)
 	print("done doing the auth token request.")
-	session = k['session']
+
+	session 				= k['session']
 	session.access_token 	= response['access_token']
 	session.expires 		= response['expires']
-	print session.access_token
-	session.save()
-
-
 	return render.callback()
