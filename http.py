@@ -4,7 +4,8 @@ import cStringIO
 def get(url):
 	buf = cStringIO.StringIO()
 	c = pycurl.Curl()
-	c.setopt(c.URL, url)
+	print(url)
+	c.setopt(c.URL, str(url))
 	c.setopt(c.WRITEFUNCTION, buf.write)
 	c.perform()
 	response_object = Response(buf.getvalue(), c.getinfo(pycurl.HTTP_CODE))
@@ -14,7 +15,7 @@ def get(url):
 def post(url, data):
 	buf = cStringIO.StringIO()
 	c = pycurl.Curl()
-	c.setopt(c.URL, url)
+	c.setopt(c.URL, repr(url))
 	c.setopt(c.POSTFIELDS, data)
 	c.setopt(c.WRITEFUNCTION, buf.write)
 	c.perform()
