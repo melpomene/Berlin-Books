@@ -1,4 +1,4 @@
-import requests, json
+import requests, json, urllib
 class Readmill():
     def __init__(self):
         self.CLIENTID = "95cc31aac4a26da8b5c67388120428b4"
@@ -18,18 +18,19 @@ class Readmill():
         else: 
             raise Exception, "Error Occured: " + str(r.error)
             
-    def findBook(self, title=None, author=None, isbn=None):
+    def findBook(self, isbn=None, title=None, author=None):
         baseStr = self.baseUrl + "/books/match?client_id="+self.CLIENTID
         params = []
         if title is not None:
-            params.append("&q[title]=" + title)
+            params.append("&q[title]=" + urllib.urlencode(title))
         if author is not None:
-            params.append("&q[author]=" + author)
+            params.append("&q[author]=" + urllib.urlencode(author))
         if isbn is not None:
-            params.append("&q[isbn]=" + isbn)
+            params.append("&q[isbn]=" + urllib.urlencode(isbn))
         baseStr += ''.join(params)
         r = requests.get(baseStr)
         if r.status_code == 200: 
+            return r.content
             return json.loads(r.content)
         else: 
             raise Exception, "Error Occured: " + str(r.error)
@@ -43,7 +44,7 @@ if __name__ == "__main__":
     print "Get user 1"
     print r.getUser(1)
     print "Find book"
-    print r.findBook(2) 
+    print r.findBook(isbn="9780765319852") 
     
     
     
