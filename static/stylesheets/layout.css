@@ -49,7 +49,7 @@
 		text-align: center;
 	}
 
-	.facebook h1 {
+	.facebook h3 {
 		color: #E1DBA1; 
 	}
 
@@ -69,6 +69,7 @@
 		color: #E1DBA1;
 		font-family: 'Average';
 		font-size: 85px;
+		line-height: 85px;
 	}
 
 
