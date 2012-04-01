@@ -2,8 +2,8 @@ $def with (recommended)
 
 <h2>Suggested reads!</h2>
 $for book in recommended:
+    $if book is not None and 'title' in book and 'images' in book and 'thumbnail' in book['images']:
 	<div class="book">
-    $if 'title' in book and 'images' in book and 'thumbnail' in book['images']:
 	    <a href="https://duckduckgo.com/?q=$book['title']" /><img src="$book['images']['thumbnail']" alt="$book['title']"/></a>
     </div>
 
