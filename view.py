@@ -25,8 +25,9 @@ def index(**k):
 		recommendations = r.compare()
 		recommended = []
 		for book in recommendations:
-			recommended.append( bookinfo.get(book) )
-	
+			b =  bookinfo.get(book)
+			if b is not None: 
+				recommended.append(b)
 
 		return render.index(recommended=recommended)
 
