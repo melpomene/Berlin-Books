@@ -21,6 +21,13 @@
 		background-color: #6C4916;
 		color: #E1DBA1;
 	}
+	a:visited {
+    	color: #E1DBA1;
+	}
+	a {
+    	text-decoration: none;
+    	color: #E1DBA1;
+	}
 
 	#top {
 		text-align: center;
