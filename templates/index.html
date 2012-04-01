@@ -3,7 +3,8 @@ $def with (recommended)
 <h2>Suggested reads!</h2>
 $for book in recommended:
 	<div class="book">
-    <a href="https://duckduckgo.com/?q=$book['title']" /><img src="$book['images']['thumbnail']" alt="$book['title']"/></a>
+    $if 'title' in book and 'images' in book and 'thumbnail' in book['images']:
+	    <a href="https://duckduckgo.com/?q=$book['title']" /><img src="$book['images']['thumbnail']" alt="$book['title']"/></a>
     </div>
 
 
