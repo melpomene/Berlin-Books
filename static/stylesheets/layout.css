@@ -41,6 +41,16 @@
 		color: #E1DBA1;
 		font-family: 'Average';
 		font-size: 20px;
+		text-align: center;
+	}
+
+	.facebook {
+		padding-top: 30px;
+		text-align: center;
+	}
+
+	.facebook h1 {
+		color: #E1DBA1; 
 	}
 
 	.book_cover {
