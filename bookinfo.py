@@ -8,12 +8,15 @@ def get(name):
 	r = http.get(query_url)
 	json_r = json.loads(r.content)
 	if 'items' in json_r:
-		item = json_r['items'][0]
-		return_item = dict()
-		if 'title' in item['volumeInfo']:       return_item['title'] = item['volumeInfo']['title']
-		if 'authors' in item['volumeInfo']:     return_item['authors'] = item['volumeInfo']['authors']
-		if 'description' in item['volumeInfo']: return_item['description'] = item['volumeInfo']['description']
-		if 'imageLinks' in item['volumeInfo']:  return_item['images'] = item['volumeInfo']['imageLinks']
-		return return_item
+		try:
+			item = json_r['items'][0]
+			return_item = dict()
+			if 'title' in item['volumeInfo']:       return_item['title'] = item['volumeInfo']['title']
+			if 'authors' in item['volumeInfo']:     return_item['authors'] = item['volumeInfo']['authors']
+			if 'description' in item['volumeInfo']: return_item['description'] = item['volumeInfo']['description']
+			if 'imageLinks' in item['volumeInfo']:  return_item['images'] = item['volumeInfo']['imageLinks']
+			return return_item
+		except KeyError:
+			return
 	else:
 		print("no data found")
