@@ -13,7 +13,8 @@ def get(name):
 			return_item = dict()
 			if 'title' in item['volumeInfo']:       return_item['title'] = item['volumeInfo']['title']
 			if 'authors' in item['volumeInfo']:     return_item['authors'] = item['volumeInfo']['authors']
-			if 'description' in item['volumeInfo']: return_item['description'] = item['volumeInfo']['description']
+			if 'description' in item['volumeInfo']: return_item['description'] = item['volumeInfo']['description'][:140] + " [...]"
+			#if 'description' in item['volumeInfo']: return_item['description'] = item['volumeInfo']['subtitle']
 			if 'imageLinks' in item['volumeInfo']:  return_item['images'] = item['volumeInfo']['imageLinks']
 			return return_item
 		except KeyError:
