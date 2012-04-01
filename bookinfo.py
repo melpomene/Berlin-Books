@@ -17,6 +17,6 @@ def get(name):
 			if 'imageLinks' in item['volumeInfo']:  return_item['images'] = item['volumeInfo']['imageLinks']
 			return return_item
 		except KeyError:
-			return
+			pass
 	else:
 		print("no data found")
